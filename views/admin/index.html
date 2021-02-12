@@ -1,0 +1,10 @@
+<!-- 因为访问后台的不同页面，每个页面都有一样的顶部导航栏，所以将顶部导航栏写在另一个html文件中，把顶部导航栏的代码继承过来就行，把与其他页面不同的代码写在这里 -->
+<!-- 继承指定的html文件 -->
+{% extends 'layout.html' %}
+<!-- 填写占位 -->
+{% block main %}
+<div class="jumbotron">
+    <h1>Hello, {{userInfo.username}}!</h1>
+    <p>欢迎进入博客后台管理</p>
+</div>
+{% endblock %}

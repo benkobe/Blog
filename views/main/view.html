@@ -1,0 +1,55 @@
+{% extends 'layout.html' %} {% block content%}
+<div class="listBox">
+    <h1>{{content.title}}</h1>
+    <p class="colDefault">
+        作者:<span class="colInfo">{{content.user.username}}</span> 时间:
+        <span class="colInfo">{{content.addTime | date('Y-m-d H:i:s',-8*60)}}</span> 阅读:
+        <span class="colInfo">{{content.views}}</span> 评论:
+        <span class="colInfo">{{content.comments.length}}</span>
+    </p>
+    <dfn>{{content.content}}</dfn>
+</div>
+<div class="listBox message">
+    <h3 class="textLeft"><strong>评论</strong><span class="em">一共有<em id="messageCount">0</em>条评论</span></h3>
+    {% if userInfo._id %}
+    <p class="textLeft"><strong>{{userInfo.username}}</strong></p>
+    <p class="textLeft clear">
+        <textarea id="messageContent"></textarea>
+        <!-- 下面这个类型为Hidden的input的作用只是为了方便comment.js获取当前文章的id -->
+        <input type="hidden" id="contentID" value="{{content._id.toString()}}">
+        <button class="submit" id="messageBtn">提交</button>
+
+    </p>
+    {% else %}
+    <p class="bgDanger" style="line-height:30px;">你还没有登录，请先登录</p>
+    {% endif %}
+    <!-- <div class="messageList">
+        <div class="messageBox">
+            <p>还没有留言</p>
+        </div>
+    </div> -->
+
+    <div class="messageList" style="display: block;">
+        <!-- <div class="messageBox">
+            <p class="name clear">
+                <span class="fl">admin</span>
+                <span class="fr">2021-02-07-14-35-40</span>
+            </p>
+            <p>哈哈</p>
+        </div>  -->
+    </div>
+    <!-- 分页 -->
+    <div class="pager">
+        <ul class="clear">
+            <li class="previous">
+                <a href="">上一页</a>
+            </li>
+            <li></li>
+            <li class="next">
+                <a href="">下一页</a>
+            </li>
+        </ul>
+    </div>
+</div>
+<script src="/public/js/comment.js"></script>
+{% endblock %}

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 因为main.css文件需要一次新的请求才能获取到main.css文件中的内容；因为css文件的内容时静态的，所以把css文件放在public文件夹下，当需要用到时，app.use()方法会获取到的，这样就避免了又要设置一个路由来获取css文件了 -->
+    <link rel="stylesheet" type="text/css" href="/public/main.css">
+</head>
+
+<body>
+    <h1>欢迎来到我的博客！</h1>
+</body>
+
+</html>

@@ -1,0 +1,91 @@
+1、模块划分
+根据功能进行模块划分
+	前台模块
+	后台模块
+	API模块
+
+根据不同的功能通过app.use()方法划分不同的模块
+	app.use('/', require('./routers/main'));
+	app.use('/admin', require('./routers/admin'));
+	app.use('/api', require('./routers/api'));
+
+前台路由+模板
+main模块
+/  首页
+/view  内容页
+
+api模块
+/  首页
+/register  用户注册
+/login  用户登录
+/comment  评论获取
+/comment/post  评论提交
+
+admin模块
+/  首页
+用户管理
+/user  用户列表
+分类管理
+/category  分类列表
+/category/add  分类添加
+/category/edit  分类修改
+/category/delete  分类删除
+文章内容管理
+/artical  文章列表
+/artical/add  文章添加
+/artical/edit  文章修改
+/artical/delete  文章删除
+评论管理
+/comment  评论列表
+/comment/delete  评论删除
+
+
+2、功能开发顺序
+用户
+栏目(前台和后台的展示)
+内容
+评论
+
+3、编码顺序
+通过Schema定义设计数据存储结构
+功能逻辑
+页面展示
+
+4、具体功能实现
+用户的注册
+userSchema结构设计
+注册界面设计
+注册逻辑
+	使用ajax方式实现注册
+	api接口编写
+	
+5、数据库的连接
+首先，开启mongodb的服务器(打开命令提示符，切换到mongodb的安装目录下的bin)
+然后，打开数据库可视化软件，连接到mongodb服务器
+最后，在app.js(应用入口文件)中，连接数据库(mongoose.connect())
+定义数据库中的表的结构(规则)，注意：这个js文件一般在schemas文件夹下
+根据这个结构(规则)创建一个数据模型类，注意：这个js文件一般在model文件夹下
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

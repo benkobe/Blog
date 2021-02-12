@@ -1,0 +1,34 @@
+<!-- 因为访问后台的不同页面，每个页面都有一样的顶部导航栏，所以将顶部导航栏写在另一个html文件中，把顶部导航栏的代码继承过来就行，把与其他页面不同的代码写在这里 -->
+<!-- 继承指定的html文件 -->
+{% extends 'layout.html' %}
+<!-- 填写占位 -->
+{% block main %}
+<div>
+    <!-- 面包屑导航 -->
+    <ol class="breadcrumb">
+        <li><a href="/admin">后台管理首页</a></li>
+        <li class="active">用户列表</li>
+    </ol>
+    <h2>用户列表</h2>
+    <table class="table table-hover table-striped table-bordered">
+        <tr>
+            <th>ID</th>
+            <th>用户名</th>
+            <th>密码</th>
+            <th>管理员</th>
+        </tr>
+        {% for user in users %}
+        <tr>
+            <td>{{user._id.toString()}}</td>
+            <td>{{user.username}}</td>
+            <td>{{user.password}}</td>
+            <td>{% if user.isAdmin %}是{% else %}否{% endif %}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+<!-- 分页 -->
+{% include 'page.html' %}
+<!-- 结束占位 -->
+{% endblock %}

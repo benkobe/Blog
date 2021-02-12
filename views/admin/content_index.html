@@ -1,0 +1,58 @@
+<!-- 因为访问后台的不同页面，每个页面都有一样的顶部导航栏，所以将顶部导航栏写在另一个html文件中，把顶部导航栏的代码继承过来就行，把与其他页面不同的代码写在这里 -->
+<!-- 继承指定的html文件 -->
+{% extends 'layout.html' %}
+<!-- 填写占位 -->
+{% block main %}
+<div>
+    <!-- 面包屑导航 -->
+    <ol class="breadcrumb">
+        <li><a href="/admin">后台管理首页</a></li>
+        <li class="active">文章管理</li>
+        <li class="active">文章列表</li>
+    </ol>
+    <h2>文章列表</h2>
+    <table class="table table-hover table-striped table-bordered">
+        <tr>
+            <th>ID</th>
+            <th>分类</th>
+            <th>标题</th>
+            <th>作者</th>
+            <th>发表时间</th>
+            <th>阅读量</th>
+            <th>操作</th>
+        </tr>
+        {% for content in contents %}
+        <tr>
+            <td>{{content._id.toString()}}</td>
+            <td>{{content.categoryname.categoryname}}</td>
+            <td>{{content.title}}</td>
+            <td>{{content.user.username}}</td>
+            <!-- |：表示过滤器函数，date()函数是swig模块封装好的，在node_modules中的swig中的lib中的filters.js中可以找到 -->
+            <!-- date()函数的第一个参数其实就是content.addTime，第二个参数是时间格式化的样式，第三个参数是因为时区不同造成的时间偏移量(分钟)，东八区所以是(-80*60)分钟 -->
+            <td>{{content.addTime | date('Y-m-d H:i:s',-8*60)}}</td>
+            <td>{{content.views}}</td>
+            <td>
+                <a href="/admin/content/edit?id={{content._id.toString()}}">修改</a> |
+                <a href="/admin/content/delete?id={{content._id.toString()}}">删除</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+<!-- 分页 -->
+<nav aria-label="...">
+    <ul class="pager">
+        <li class="previous"><a href="/admin/content?page={{page-1}}"><span aria-hidden="true">&larr;</span> 上一页</a></li>
+        <li>
+            共
+            <strong>{{count}}</strong> 条数据 每页显示
+            <strong>{{limit}}</strong> 条数据 共
+            <strong>{{pages}}</strong> 页 当前为第
+            <strong>{{page}}</strong> 页
+        </li>
+        <li class="next"><a href="/admin/content?page={{page+1}}">下一页 <span aria-hidden="true">&rarr;</span></a></li>
+    </ul>
+</nav>
+<!-- 结束占位 -->
+{% endblock %}

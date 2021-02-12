@@ -1,0 +1,48 @@
+<!-- 因为访问后台的不同页面，每个页面都有一样的顶部导航栏，所以将顶部导航栏写在另一个html文件中，把顶部导航栏的代码继承过来就行，把与其他页面不同的代码写在这里 -->
+<!-- 继承指定的html文件 -->
+{% extends 'layout.html' %}
+<!-- 填写占位 -->
+{% block main %}
+<div>
+    <!-- 面包屑导航 -->
+    <ol class="breadcrumb">
+        <li><a href="/admin">后台管理首页</a></li>
+        <li class="active">分类管理</li>
+        <li class="active">分类列表</li>
+    </ol>
+    <h2>分类列表</h2>
+    <table class="table table-hover table-striped table-bordered">
+        <tr>
+            <th>ID</th>
+            <th>分类名称</th>
+            <th>操作</th>
+        </tr>
+        {% for category in categories %}
+        <tr>
+            <td>{{category._id.toString()}}</td>
+            <td>{{category.categoryname}}</td>
+            <td>
+                <a href="/admin/category/edit?id={{category._id.toString()}}">修改</a> |
+                <a href="/admin/category/delete?id={{category._id.toString()}}">删除</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+<!-- 分页 -->
+<nav aria-label="...">
+    <ul class="pager">
+        <li class="previous"><a href="/admin/category?page={{page-1}}"><span aria-hidden="true">&larr;</span> 上一页</a></li>
+        <li>
+            共
+            <strong>{{count}}</strong> 条数据 每页显示
+            <strong>{{limit}}</strong> 条数据 共
+            <strong>{{pages}}</strong> 页 当前为第
+            <strong>{{page}}</strong> 页
+        </li>
+        <li class="next"><a href="/admin/category?page={{page+1}}">下一页 <span aria-hidden="true">&rarr;</span></a></li>
+    </ul>
+</nav>
+<!-- 结束占位 -->
+{% endblock %}

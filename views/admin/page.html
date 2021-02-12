@@ -1,0 +1,14 @@
+<!-- 分页模板文件 -->
+<nav aria-label="...">
+    <ul class="pager">
+        <li class="previous"><a href="/admin/user?page={{page-1}}"><span aria-hidden="true">&larr;</span> 上一页</a></li>
+        <li>
+            共
+            <strong>{{count}}</strong> 条数据 每页显示
+            <strong>{{limit}}</strong> 条数据 共
+            <strong>{{pages}}</strong> 页 当前为第
+            <strong>{{page}}</strong> 页
+        </li>
+        <li class="next"><a href="/admin/user?page={{page+1}}">下一页 <span aria-hidden="true">&rarr;</span></a></li>
+    </ul>
+</nav>
